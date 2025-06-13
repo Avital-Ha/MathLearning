@@ -1,0 +1,245 @@
+/* Reset בסיסי */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html, #root {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #d0e8ff 0%, #c0f0ea 50%, #ddc6ff 100%);
+  color: #2c3e50;
+}
+
+/* Layout ראשי */
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+/* HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255 255 255 / 0.85);
+  backdrop-filter: saturate(180%) blur(15px);
+  border-bottom: 1px solid rgba(255 255 255 / 0.3);
+  padding: 0 1rem;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-greeting {
+  font-size: 0.875rem;
+  color: #555;
+  user-select: none;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: linear-gradient(90deg, #3498db, #1abc9c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(90deg, #2980b9, #16a085);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.button-ghost {
+  background: transparent;
+  color: #3498db;
+}
+
+.button-ghost:hover {
+  background-color: #ebf5fb;
+}
+
+.button-outline {
+  background: transparent;
+  border: 1px solid #3498db;
+  color: #3498db;
+}
+
+.button-outline:hover {
+  background-color: #d6eaf8;
+}
+
+/* ניהול תפריט מובייל */
+.mobile-menu-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: none;
+  color: #3498db;
+}
+
+/* תפריט נגלל */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 8px rgb(0 0 0 / 0.15);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-menu-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.mobile-menu-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #3498db;
+}
+
+.mobile-user-info {
+  background: linear-gradient(90deg, #eaf6f6, #e9e3ff);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.mobile-user-info p {
+  margin: 0.2rem 0;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.mobile-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mobile-nav a.active {
+  background-color: #d6eaf8;
+  color: #2a80b9;
+}
+
+.mobile-nav a:hover {
+  background-color: #ebf5fb;
+  color: #2980b9;
+}
+
+/* תפריט שולחן עבודה */
+.desktop-nav {
+  display: flex;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+
+.desktop-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.desktop-nav a.active {
+  background-color: #d6eaf8;
+  color: #2a80b9;
+}
+
+.desktop-nav a:hover {
+  background-color: #ebf5fb;
+  color: #2980b9;
+}
+
+/* MAIN */
+.main-content {
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: inline-block;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+}
