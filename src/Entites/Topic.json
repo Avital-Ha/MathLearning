@@ -1,0 +1,50 @@
+{
+  "name": "Topic",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Topic name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Topic description"
+    },
+    "grade_level": {
+      "type": "integer",
+      "minimum": 6,
+      "maximum": 12,
+      "description": "Recommended grade level"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "arithmetic",
+        "algebra",
+        "geometry",
+        "functions",
+        "statistics"
+      ],
+      "description": "Math category"
+    },
+    "difficulty": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Difficulty level"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon name for the topic"
+    },
+    "color": {
+      "type": "string",
+      "description": "Theme color for the topic"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "grade_level"
+  ]
+}

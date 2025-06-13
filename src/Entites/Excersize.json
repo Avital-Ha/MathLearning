@@ -1,0 +1,57 @@
+{
+  "name": "Exercise",
+  "type": "object",
+  "properties": {
+    "topic_id": {
+      "type": "string",
+      "description": "ID of the related topic"
+    },
+    "question": {
+      "type": "string",
+      "description": "The exercise question"
+    },
+    "exercise_type": {
+      "type": "string",
+      "enum": [
+        "multiple_choice",
+        "drag_drop",
+        "drawing",
+        "matching",
+        "calculation"
+      ],
+      "description": "Type of exercise interaction"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Answer options for multiple choice"
+    },
+    "correct_answer": {
+      "type": "string",
+      "description": "Correct answer"
+    },
+    "difficulty_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Exercise difficulty"
+    },
+    "points": {
+      "type": "integer",
+      "default": 10,
+      "description": "Points awarded for correct answer"
+    },
+    "hint": {
+      "type": "string",
+      "description": "Helpful hint for the student"
+    }
+  },
+  "required": [
+    "topic_id",
+    "question",
+    "exercise_type",
+    "correct_answer"
+  ]
+}
