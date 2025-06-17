@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/MathLearning/static/css/main.e41cf6cd.css",
+    "main.css": "/MathLearning/static/css/main.386551c6.css",
     "main.js": "/MathLearning/static/js/main.12de1b20.js",
     "static/js/453.c70d09c5.chunk.js": "/MathLearning/static/js/453.c70d09c5.chunk.js",
     "index.html": "/MathLearning/index.html",
-    "main.e41cf6cd.css.map": "/MathLearning/static/css/main.e41cf6cd.css.map",
+    "main.386551c6.css.map": "/MathLearning/static/css/main.386551c6.css.map",
     "main.12de1b20.js.map": "/MathLearning/static/js/main.12de1b20.js.map",
     "453.c70d09c5.chunk.js.map": "/MathLearning/static/js/453.c70d09c5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e41cf6cd.css",
+    "static/css/main.386551c6.css",
     "static/js/main.12de1b20.js"
   ]
 }
