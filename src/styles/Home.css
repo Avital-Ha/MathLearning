@@ -39,6 +39,7 @@
 
 .feature-card:hover {
   transform: translateY(-5px);
+  cursor:pointer;
 }
 
 .feature-card h2 {

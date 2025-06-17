@@ -2,6 +2,9 @@ import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Pages/Home";
+import AuthChoice from "./Pages/AuthChoice";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
 
 function Dashboard() {
   return <h1>Dashboard Page</h1>;
@@ -23,20 +26,20 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        {/* דף Setup בלי Layout */}
-        <Route path="/setup" element={<Setup />} />
+        {/* דפים ללא Layout */}
+        <Route path="/auth" element={<AuthChoice />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
-        {/* כל השאר בתוך Layout */}
+        {/* דפים בתוך Layout */}
         <Route path="/" element={<Layout />}>
-          {/* Home יהיה בנתיב הריק */}
           <Route index element={<Home />} />
-
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Exercises" element={<Exercises />} />
           <Route path="Games" element={<Games />} />
           <Route path="Progress" element={<Progress />} />
 
-          {/* כל נתיב לא מוכר מפנה ל-Home או Dashboard */}
+          {/* כל נתיב לא מוכר מפנה ל-Home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

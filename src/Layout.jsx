@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { createPageUrl } from "./utils"; // בהנחה שיש לך את הפונקציה הזו
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { createPageUrl } from "./utils";
 import { User } from "./entities/User";
 import "./styles/Layout.css";
 
 export default function Layout() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -23,13 +25,20 @@ export default function Layout() {
     fetchUser();
   }, []);
 
-  const handleLogout = async () => {
-    await User.logout();
-    setUser(null);
-    window.location.href = createPageUrl("Home");
-  };
+  React.useEffect(() => {
+    // אם לא טוען, ואין משתמש, והעמוד הנוכחי הוא לא login/register/auth – הפנה ל-auth
+    const unauthPages = ["/auth", "/login", "/register"];
+    if (!loading && !user && !unauthPages.includes(location.pathname)) {
+      navigate("/auth");
+    }
+  }, [loading, user, location.pathname, navigate]);
+const handleLogout = async () => {
+  await User.logout();
+  setUser(null);
+  navigate("/auth");
+};
 
-  // רשימת פריטי ניווט
+
   const navItems = [
     { name: "Dashboard", path: "/Dashboard" },
     { name: "Exercises", path: "/Exercises" },
@@ -41,7 +50,12 @@ export default function Layout() {
     return (
       <div
         className="layout-container"
-        style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
       >
         <div>Loading...</div>
       </div>
@@ -49,15 +63,17 @@ export default function Layout() {
   }
 
   if (!user || !user.user_type) {
-    // אם אין משתמש או אין סוג משתמש, אפשר להחזיר children פשוט או להציג מסך מתאים
-    return <div>Access Denied. Please login.</div>;
+    // כבר מטופל ב-useEffect, אז לא מציג כלום
+    return null;
   }
 
   return (
     <div className="layout-container">
       <header className="header">
         <div className="header-inner">
-          <div className="header-greeting">Hi, {user.first_name || user.full_name}!</div>
+          <div className="header-greeting">
+            Hi, {user.first_name || user.full_name}!
+          </div>
 
           <button
             className="button button-ghost mobile-menu-button"
@@ -90,9 +106,13 @@ export default function Layout() {
         </div>
       </header>
 
+      {/* תפריט צד לנייד */}
       {mobileMenuOpen && (
         <>
-          <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}></div>
+          <div
+            className="mobile-menu-overlay"
+            onClick={() => setMobileMenuOpen(false)}
+          ></div>
           <aside className="mobile-menu">
             <div className="mobile-menu-header">
               <h2 className="mobile-menu-title">Menu</h2>
@@ -132,7 +152,6 @@ export default function Layout() {
       )}
 
       <main className="main-content">
-        {/* כאן יוצגו כל דפי המשנה לפי ה-Routes */}
         <Outlet />
       </main>
     </div>
