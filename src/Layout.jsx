@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { createPageUrl } from "./utils";
 import { User } from "./entities/User";
 import "./styles/Layout.css";
 
@@ -24,17 +25,25 @@ export default function Layout() {
     fetchUser();
   }, []);
 
-  const handleLogout = async () => {
-    await User.logout();
-    setUser(null);
-    navigate("/auth");
-  };
+  React.useEffect(() => {
+    // אם לא טוען, ואין משתמש, והעמוד הנוכחי הוא לא login/register/auth – הפנה ל-auth
+    const unauthPages = ["/auth", "/login", "/register"];
+    if (!loading && !user && !unauthPages.includes(location.pathname)) {
+      navigate("/auth");
+    }
+  }, [loading, user, location.pathname, navigate]);
+const handleLogout = async () => {
+  await User.logout();
+  setUser(null);
+  navigate("/auth");
+};
+
 
   const navItems = [
-    { name: "Dashboard", path: "/app/Dashboard" },
-    { name: "Exercises", path: "/app/Exercises" },
-    { name: "Games", path: "/app/Games" },
-    { name: "Progress", path: "/app/Progress" },
+    { name: "Dashboard", path: "/Dashboard" },
+    { name: "Exercises", path: "/Exercises" },
+    { name: "Games", path: "/Games" },
+    { name: "Progress", path: "/Progress" },
   ];
 
   if (loading) {
@@ -54,7 +63,7 @@ export default function Layout() {
   }
 
   if (!user || !user.user_type) {
-    // לא מציג כלום, כי המשתמש לא קיים
+    // כבר מטופל ב-useEffect, אז לא מציג כלום
     return null;
   }
 
@@ -74,7 +83,7 @@ export default function Layout() {
             {mobileMenuOpen ? "✕" : "☰"}
           </button>
 
-          <Link to="/app/Dashboard" className="header-logo">
+          <Link to="/Dashboard" className="header-logo">
             MathLearning
             <div className="header-logo-icon">📚</div>
           </Link>

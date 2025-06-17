@@ -18,35 +18,30 @@ function Games() {
 function Progress() {
   return <h1>Progress Page</h1>;
 }
-
-const basename = process.env.NODE_ENV === "production" ? "/MathLearning" : "/";
+function Setup() {
+  return <h1>Setup Page (No layout)</h1>;
+}
 
 export default function App() {
   return (
-    <HashRouter basename={basename}>
+    <HashRouter>
       <Routes>
-        {/* ברירת מחדל תמיד ל-auth */}
-        <Route path="/" element={<Navigate to="/auth" replace />} />
-
         {/* דפים ללא Layout */}
         <Route path="/auth" element={<AuthChoice />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {/* דפים בתוך Layout, תחת /app */}
-        <Route path="/app" element={<Layout />}>
+        {/* דפים בתוך Layout */}
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Exercises" element={<Exercises />} />
           <Route path="Games" element={<Games />} />
           <Route path="Progress" element={<Progress />} />
 
-          {/* נתיב לא מוכר בתוך layout מפנה ל-home */}
-          <Route path="*" element={<Navigate to="/app" replace />} />
+          {/* כל נתיב לא מוכר מפנה ל-Home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-
-        {/* כל נתיב לא קיים מחוץ ל-layout גם ילך ל-/auth */}
-        <Route path="*" element={<Navigate to="/auth" replace />} />
       </Routes>
     </HashRouter>
   );
