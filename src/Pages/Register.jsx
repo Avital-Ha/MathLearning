@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../FireBase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import '../styles/Register.css'; // וודא שה-CSS המותאם שם
+import '../styles/Register.css';
 
 export default function Register() {
   const [userType, setUserType] = useState("");
@@ -22,15 +22,15 @@ export default function Register() {
     setSuccess(false);
 
     if (!userType) {
-      setError("Please select a user type");
+      setError("אנא בחר סוג משתמש");
       return;
     }
     if (userType === "student" && !grade) {
-      setError("Please select a grade");
+      setError("אנא בחר כיתה");
       return;
     }
     if (!fullName || !email || !password) {
-      setError("Please fill in all fields");
+      setError("אנא מלא את כל השדות");
       return;
     }
 
@@ -40,6 +40,8 @@ export default function Register() {
       await updateProfile(userCredential.user, {
         displayName: fullName,
       });
+
+      await sendEmailVerification(userCredential.user);
 
       await setDoc(doc(db, "users", userCredential.user.uid), {
         user_type: userType,
@@ -56,8 +58,9 @@ export default function Register() {
 
   if (success) {
     return (
-      <div className="register-container" style={{ maxWidth: 400 }}>
+      <div className="register-container" >
         <h2 className="register-title">נרשמת בהצלחה!</h2>
+        <p>נשלח אליך מייל לאימות. אנא בדוק את תיבת המייל ולחץ על הקישור לאישור החשבון.</p>
         <button className="register-button" onClick={() => navigate("/login")}>
           עבור להתחברות
         </button>
@@ -67,31 +70,31 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      <h2 className="register-title">Register</h2>
+      <h2 className="register-title">הרשמה</h2>
       <form className="register-form" onSubmit={handleSubmit}>
         <label className="register-label">
-          User Type:
+          סוג משתמש:
           <select
             className="register-select"
             value={userType}
             onChange={e => setUserType(e.target.value)}
           >
-            <option value="">Select</option>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-            <option value="parent">Parent</option>
+            <option value="">בחר</option>
+            <option value="student">תלמיד</option>
+            <option value="teacher">מורה</option>
+            <option value="parent">הורה</option>
           </select>
         </label>
 
         {userType === "student" && (
           <label className="register-label">
-            Grade:
+            כיתה:
             <select
               className="register-select"
               value={grade}
               onChange={e => setGrade(e.target.value)}
             >
-              <option value="">Select Grade</option>
+              <option value="">בחר כיתה</option>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
                 <option key={num} value={num}>{num}</option>
               ))}
@@ -100,7 +103,7 @@ export default function Register() {
         )}
 
         <label className="register-label">
-          Full Name:
+          שם מלא:
           <input
             className="register-input"
             type="text"
@@ -111,7 +114,7 @@ export default function Register() {
         </label>
 
         <label className="register-label">
-          Email:
+          מייל:
           <input
             className="register-input"
             type="email"
@@ -122,7 +125,7 @@ export default function Register() {
         </label>
 
         <label className="register-label">
-          Password:
+          סיסמה:
           <input
             className="register-input"
             type="password"
@@ -136,7 +139,7 @@ export default function Register() {
         {error && <p className="register-error">{error}</p>}
 
         <button className="register-button" type="submit">
-          Register
+          הרשמה
         </button>
       </form>
     </div>

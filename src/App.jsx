@@ -18,13 +18,12 @@ function Games() {
 function Progress() {
   return <h1>Progress Page</h1>;
 }
-function Setup() {
-  return <h1>Setup Page (No layout)</h1>;
-}
+
+const basename = process.env.NODE_ENV === "production" ? "/MathLearning" : "/";
 
 export default function App() {
   return (
-    <HashRouter>
+    <HashRouter basename={basename}>
       <Routes>
         {/* דפים ללא Layout */}
         <Route path="/auth" element={<AuthChoice />} />

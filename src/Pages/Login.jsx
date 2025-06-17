@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../FireBase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../FireBase"; // Make sure this path is correct
-import '../styles/Login.css'; // Optional styling
+import '../styles/Login.css';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,54 +11,58 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
 
-  console.log("Attempting login with", email, password);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-  if (!email || !password) {
-    setError("Please enter both email and password");
-    return;
-  }
+      if (!userCredential.user.emailVerified) {
+        setError("נא לאמת את כתובת המייל לפני כניסה");
+        await auth.signOut();
+        return;
+      }
 
-  try {
-    await signInWithEmailAndPassword(auth, email.trim(), password);
-    navigate("/");
-  } catch (error) {
-    console.error("Login error:", error.code, error.message);
-    setError(`Login failed: ${error.message}`);
-  }
-};
+      // כניסה מוצלחת, מעבר לדשבורד (או עמוד הבית)
+      navigate("/");
+    } catch (err) {
+      setError("אימייל או סיסמה לא נכונים");
+    }
+  };
 
   return (
-  <div className="login-container">
-  <h2>Login</h2>
-  <form onSubmit={handleSubmit} className="login-form">
-    <label className="login-label">
-      Email:
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="login-input"
-      />
-    </label>
-    <label className="login-label">
-      Password:
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        className="login-input"
-      />
-    </label>
-    {error && <p className="login-error">{error}</p>}
-    <button type="submit" className="login-button">Login</button>
-  </form>
-</div>
+    <div className="login-container">
+      <h2 className="login-title">התחברות</h2>
+      <form className="login-form" onSubmit={handleLogin}>
+        <label className="login-label">
+          מייל:
+          <input
+            className="login-input"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+        </label>
 
+        <label className="login-label">
+          סיסמה:
+          <input
+            className="login-input"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+        </label>
+
+        {error && <p className="login-error">{error}</p>}
+
+        <button className="login-button" type="submit">
+          התחבר
+        </button>
+      </form>
+    </div>
   );
 }
