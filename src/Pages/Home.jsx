@@ -10,6 +10,7 @@ export default function Home() {
         <p>Your companion for math exercises, games, and progress tracking.</p>
       </header>
 
+      {/* ✨ קודם כל הפיצ'רים: תרגול, משחקים, התקדמות */}
       <section className="home-features">
         <div className="feature-card">
           <h2>Exercises</h2>
@@ -25,6 +26,34 @@ export default function Home() {
           <h2>Progress</h2>
           <p>Track your learning journey and see your improvement over time.</p>
           <Link to="/Progress" className="btn btn-primary">View Progress</Link>
+        </div>
+      </section>
+
+      {/* ✨ אחר כך – שלושת סוגי המשתמשים */}
+      <section className="user-types">
+        <h2>Perfect for Everyone</h2>
+        <div className="user-cards">
+          <div className="user-card student">
+            <div className="icon">👥</div>
+            <h3>Students</h3>
+            <p>
+              Interactive dashboard with personalized learning paths and achievement tracking.
+            </p>
+          </div>
+          <div className="user-card parent">
+            <div className="icon">👥</div>
+            <h3>Parents</h3>
+            <p>
+              Monitor your child's progress and get insights on strengths and areas for improvement.
+            </p>
+          </div>
+          <div className="user-card teacher">
+            <div className="icon">🎓</div>
+            <h3>Teachers</h3>
+            <p>
+              Create custom exercises and track student progress across multiple classes.
+            </p>
+          </div>
         </div>
       </section>
 

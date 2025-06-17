@@ -81,3 +81,54 @@
   color: #999;
   user-select: none;
 }
+.user-types {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.user-types h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.user-card {
+  flex: 1 1 250px;
+  max-width: 300px;
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f0;
+  transition: transform 0.3s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+.user-card.student {
+  background-color: #dbeafe; /* light blue */
+  color: #1e40af;
+}
+
+.user-card.parent {
+  background-color: #ccfbf1; /* mint green */
+  color: #0f766e;
+}
+
+.user-card.teacher {
+  background-color: #f3e8ff; /* light purple */
+  color: #7e22ce;
+}
+
+.user-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
