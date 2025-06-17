@@ -25,22 +25,28 @@ export default function App() {
   return (
     <HashRouter basename={basename}>
       <Routes>
+        {/* ברירת מחדל תמיד ל-auth */}
+        <Route path="/" element={<Navigate to="/auth" replace />} />
+
         {/* דפים ללא Layout */}
         <Route path="/auth" element={<AuthChoice />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {/* דפים בתוך Layout */}
-        <Route path="/" element={<Layout />}>
+        {/* דפים בתוך Layout, תחת /app */}
+        <Route path="/app" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Exercises" element={<Exercises />} />
           <Route path="Games" element={<Games />} />
           <Route path="Progress" element={<Progress />} />
 
-          {/* כל נתיב לא מוכר מפנה ל-Home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* נתיב לא מוכר בתוך layout מפנה ל-home */}
+          <Route path="*" element={<Navigate to="/app" replace />} />
         </Route>
+
+        {/* כל נתיב לא קיים מחוץ ל-layout גם ילך ל-/auth */}
+        <Route path="*" element={<Navigate to="/auth" replace />} />
       </Routes>
     </HashRouter>
   );

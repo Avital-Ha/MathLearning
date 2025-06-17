@@ -95,7 +95,7 @@ export default function Register() {
               onChange={e => setGrade(e.target.value)}
             >
               <option value="">בחר כיתה</option>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
+              {['א','ב' , 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט','י','י"א','י"ב'].map(num => (
                 <option key={num} value={num}>{num}</option>
               ))}
             </select>

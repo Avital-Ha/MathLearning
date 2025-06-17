@@ -25,7 +25,7 @@ export default function Login() {
       }
 
       // כניסה מוצלחת, מעבר לדשבורד (או עמוד הבית)
-      navigate("/");
+      navigate("/app");
     } catch (err) {
       setError("אימייל או סיסמה לא נכונים");
     }
