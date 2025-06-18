@@ -37,6 +37,7 @@
   transition: transform 0.3s ease;
 }
 
+
 .feature-card:hover {
   transform: translateY(-5px);
   cursor:pointer;
@@ -49,7 +50,7 @@
 }
 
 .feature-card p {
-  font-size: 1rem;
+  font-size: 1.2vw;
   color: #666;
   margin-bottom: 1.5rem;
 }
@@ -78,7 +79,7 @@
 
 .home-footer {
   margin-top: 4rem;
-  font-size: 0.875rem;
+  font-size: 1vw;
   color: #999;
   user-select: none;
 }
@@ -110,23 +111,27 @@
   transition: transform 0.3s;
 }
 
+
 .user-card:hover {
   transform: translateY(-5px);
 }
 
 .user-card.student {
-  background-color: #dbeafe; /* light blue */
+  background-color: #bedaff; /* light blue */
   color: #1e40af;
+   font-size: 1.2vw;
 }
 
 .user-card.parent {
   background-color: #ccfbf1; /* mint green */
   color: #0f766e;
+   font-size: 1.2vw;
 }
 
 .user-card.teacher {
   background-color: #f3e8ff; /* light purple */
   color: #7e22ce;
+   font-size: 1.2vw;
 }
 
 .user-card .icon {

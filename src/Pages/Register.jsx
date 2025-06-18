@@ -60,7 +60,7 @@ export default function Register() {
     return (
       <div className="register-container" >
         <h2 className="register-title">נרשמת בהצלחה!</h2>
-        <p>נשלח אליך מייל לאימות. אנא בדוק את תיבת המייל ולחץ על הקישור לאישור החשבון.</p>
+        <p className="register-text">נשלח אליך מייל לאימות. אנא בדקו את תיבת המייל (שימו לב לספאם שלכם) לחצו על הקישור לאישור החשבון.</p>
         <button className="register-button" onClick={() => navigate("/login")}>
           עבור להתחברות
         </button>

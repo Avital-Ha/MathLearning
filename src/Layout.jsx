@@ -40,10 +40,10 @@ const handleLogout = async () => {
 
 
   const navItems = [
-    { name: "Dashboard", path: "/Dashboard" },
-    { name: "Exercises", path: "/Exercises" },
-    { name: "Games", path: "/Games" },
-    { name: "Progress", path: "/Progress" },
+    { name: "מרכז אישי", path: "/Dashboard" },
+    { name: "תרגולים", path: "/Exercises" },
+    { name: "משחקים", path: "/Games" },
+    { name: "התקדמות", path: "/Progress" },
   ];
 
   if (loading) {
@@ -71,9 +71,7 @@ const handleLogout = async () => {
     <div className="layout-container">
       <header className="header">
         <div className="header-inner">
-          <div className="header-greeting">
-            Hi, {user.first_name || user.full_name}!
-          </div>
+         
 
           <button
             className="button button-ghost mobile-menu-button"
@@ -87,6 +85,9 @@ const handleLogout = async () => {
             MathLearning
             <div className="header-logo-icon">📚</div>
           </Link>
+           <div className="header-greeting">
+            הי, {user.first_name || user.full_name}!
+          </div>
 
           <nav className="desktop-nav">
             {navItems.map((item) => (
@@ -101,7 +102,7 @@ const handleLogout = async () => {
           </nav>
 
           <button className="button button-ghost" onClick={handleLogout}>
-            Logout
+            התנתקות
           </button>
         </div>
       </header>
@@ -115,7 +116,7 @@ const handleLogout = async () => {
           ></div>
           <aside className="mobile-menu">
             <div className="mobile-menu-header">
-              <h2 className="mobile-menu-title">Menu</h2>
+              <h2 className="mobile-menu-title">תפריט</h2>
               <button
                 className="mobile-menu-close-btn"
                 onClick={() => setMobileMenuOpen(false)}
@@ -126,9 +127,9 @@ const handleLogout = async () => {
             </div>
 
             <div className="mobile-user-info">
-              <p>Welcome back</p>
+              <p>ברוכים השבים</p>
               <p>{user.first_name || user.full_name}</p>
-              {user.grade && <p>Grade {user.grade}</p>}
+              {user.grade && <p>כיתה {user.grade}</p>}
             </div>
 
             <nav className="mobile-nav">
@@ -145,7 +146,7 @@ const handleLogout = async () => {
             </nav>
 
             <button className="button button-outline" onClick={handleLogout}>
-              Logout
+              התנתקות
             </button>
           </aside>
         </>

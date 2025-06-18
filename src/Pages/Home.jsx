@@ -6,52 +6,52 @@ export default function Home() {
   return (
     <div className="home-container">
       <header className="home-header">
-        <h1>Welcome to MathLearning</h1>
-        <p>Your companion for math exercises, games, and progress tracking.</p>
+        <h1>ברוכים הבאים ל <br/>MathLearning</h1>
+        <p>אתר למידה מתמטי מותאם אישית עם משחקים תרגולים והתקדמות שלכם</p>
       </header>
 
       {/* ✨ קודם כל הפיצ'רים: תרגול, משחקים, התקדמות */}
       <section className="home-features">
         <div className="feature-card">
-          <h2>Exercises</h2>
-          <p>Practice math exercises tailored to your grade and skill level.</p>
-          <Link to="/Exercises" className="btn btn-primary">Start Practicing</Link>
+          <h2>תרגולים</h2>
+          <p>תרגולים מתמטים חווייתים מותאמים אישית לכיתה ולרמה שלכם</p>
+          <Link to="/Exercises" className="btn btn-primary">התחילו לתרגל </Link>
         </div>
         <div className="feature-card">
-          <h2>Games</h2>
-          <p>Learn math concepts through fun and interactive games.</p>
-          <Link to="/Games" className="btn btn-primary">Play Games</Link>
+          <h2>משחקים</h2>
+          <p>ללמוד מתמטיקה מורכבת בכיף דרך משחקים לכל הכיתות והרמות</p>
+          <Link to="/Games" className="btn btn-primary">שחקו משחקים</Link>
         </div>
         <div className="feature-card">
-          <h2>Progress</h2>
-          <p>Track your learning journey and see your improvement over time.</p>
-          <Link to="/Progress" className="btn btn-primary">View Progress</Link>
+          <h2>התקדמות</h2>
+          <p>עקבו אחד הלמידה שלכם ותראו את התהליך שלכם עם הזמן</p>
+          <Link to="/Progress" className="btn btn-primary">צפו בהתקדמות</Link>
         </div>
       </section>
 
       {/* ✨ אחר כך – שלושת סוגי המשתמשים */}
       <section className="user-types">
-        <h2>Perfect for Everyone</h2>
+        <h2>מתאים לכולם</h2>
         <div className="user-cards">
           <div className="user-card student">
             <div className="icon">👥</div>
-            <h3>Students</h3>
+            <h3>תלמידים</h3>
             <p>
-              Interactive dashboard with personalized learning paths and achievement tracking.
+              אזור אישי אינטראקטיבי עם משחקונים ותרגולים מושלמים ללמידה שלכם
             </p>
           </div>
           <div className="user-card parent">
             <div className="icon">👥</div>
-            <h3>Parents</h3>
+            <h3>הורים</h3>
             <p>
-              Monitor your child's progress and get insights on strengths and areas for improvement.
+              עקבו אחר ההתקדמות של הילד שלכם , וקבלו מאיתנו טיפים לשיפור
             </p>
           </div>
           <div className="user-card teacher">
             <div className="icon">🎓</div>
-            <h3>Teachers</h3>
+            <h3>מורים</h3>
             <p>
-              Create custom exercises and track student progress across multiple classes.
+             תוכלו ליצור בקלות תרגולים מותאמים אישית לחומר ולכיתה שלכם 
             </p>
           </div>
         </div>
