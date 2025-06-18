@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/MathLearning/static/css/main.007641fa.css",
+    "main.css": "/MathLearning/static/css/main.3326ff9b.css",
     "main.js": "/MathLearning/static/js/main.a544d350.js",
     "static/js/453.c70d09c5.chunk.js": "/MathLearning/static/js/453.c70d09c5.chunk.js",
     "static/media/logo192.png": "/MathLearning/static/media/logo192.70fe2b96d638b4dac276.png",
     "index.html": "/MathLearning/index.html",
-    "main.007641fa.css.map": "/MathLearning/static/css/main.007641fa.css.map",
+    "main.3326ff9b.css.map": "/MathLearning/static/css/main.3326ff9b.css.map",
     "main.a544d350.js.map": "/MathLearning/static/js/main.a544d350.js.map",
     "453.c70d09c5.chunk.js.map": "/MathLearning/static/js/453.c70d09c5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.007641fa.css",
+    "static/css/main.3326ff9b.css",
     "static/js/main.a544d350.js"
   ]
 }
