@@ -1,0 +1,78 @@
+.exercises-list-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.exercises-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 0.5rem;
+}
+
+.no-exercises {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.loading {
+  font-size: 1.2rem;
+  color: #4a90e2;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.exercises-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.exercise-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.exercise-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+}
+
+.exercise-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.exercise-description {
+  font-size: 1rem;
+  color: #555;
+  white-space: pre-wrap; /* לשמור על שורות במידה ויש */
+}
+.topic-tab{
+     padding: "8px 16px";
+    border: none;
+    cursor: "pointer";
+    border-radius: 30px;
+    color:white
+}

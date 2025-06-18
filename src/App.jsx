@@ -5,13 +5,12 @@ import Home from "./Pages/Home";
 import AuthChoice from "./Pages/AuthChoice";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
+import Exercises from "./Pages/Excersizes";
 
 function Dashboard() {
   return <h1>Dashboard Page</h1>;
 }
-function Exercises() {
-  return <h1>Exercises Page</h1>;
-}
+
 function Games() {
   return <h1>Games Page</h1>;
 }

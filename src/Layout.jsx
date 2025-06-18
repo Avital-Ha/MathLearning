@@ -81,13 +81,16 @@ const handleLogout = async () => {
             {mobileMenuOpen ? "✕" : "☰"}
           </button>
 
-          <Link to="/Dashboard" className="header-logo">
+          <Link to="/Home" className="header-logo">
             MathLearning
             <div className="header-logo-icon">📚</div>
           </Link>
            <div className="header-greeting">
             הי, {user.first_name || user.full_name}!
+            {user.grade && <p>כיתה {user.grade}</p>}
+
           </div>
+
 
           <nav className="desktop-nav">
             {navItems.map((item) => (
