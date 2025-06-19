@@ -8,11 +8,12 @@
 }
 
 .exercises-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #222;
-  border-bottom: 2px solid #4a90e2;
-  padding-bottom: 0.5rem;
+    font-size: 3rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #3498db, #1abc9c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .no-exercises {
@@ -61,9 +62,10 @@
   white-space: pre-wrap; /* לשמור על שורות במידה ויש */
 }
 .topic-tab{
-     padding: "8px 16px";
+  padding: "8px 16px";
+    font-size: 1.2rem;
     border: none;
     cursor: "pointer";
     border-radius: 30px;
-    color:white
+    color: white;
 }

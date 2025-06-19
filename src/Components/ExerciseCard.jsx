@@ -6,15 +6,38 @@ export default function ExerciseCard({ exercise }) {
   const [userAnswer, setUserAnswer] = useState("");
   const [draggedOption, setDraggedOption] = useState(null);
   const [feedback, setFeedback] = useState(null);
+  const [sortedItems, setSortedItems] = useState(
+    exercise.answerType === "drag-sort" ? exercise.options : []
+  );
+  const [draggedIndex, setDraggedIndex] = useState(null);
 
   const handleDrop = (e) => {
     e.preventDefault();
     setUserAnswer(draggedOption);
   };
 
+  const handleDragStartIndex = (index) => {
+    setDraggedIndex(index);
+  };
+
+  const handleDropIndex = (index) => {
+    if (draggedIndex === null) return;
+    const updated = [...sortedItems];
+    const [draggedItem] = updated.splice(draggedIndex, 1);
+    updated.splice(index, 0, draggedItem);
+    setSortedItems(updated);
+    setDraggedIndex(null);
+  };
+
   const checkAnswer = () => {
-    if (!userAnswer) return;
-    const isCorrect = userAnswer === exercise.answer;
+    let isCorrect = false;
+
+    if (exercise.answerType === "drag-sort") {
+      isCorrect = JSON.stringify(sortedItems) === JSON.stringify(exercise.answer);
+    } else {
+      isCorrect = userAnswer === exercise.answer;
+    }
+
     setFeedback(isCorrect ? "correct" : "wrong");
   };
 
@@ -24,13 +47,21 @@ export default function ExerciseCard({ exercise }) {
         return (
           <div className="multiple-choice">
             {exercise.options?.map((option, index) => (
-              <label key={index} className="option-label" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-               <input
+              <label
+                key={index}
+                className="option-label"
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <input
                   type="radio"
                   name={`question-${exercise.id}`}
                   value={option}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  style={{ transform: 'scale(1.5)', marginRight: '8px' ,cursor:'pointer'}} // 1.5 = הגדלה של 150%
+                  style={{
+                    transform: "scale(1.5)",
+                    marginRight: "8px",
+                    cursor: "pointer",
+                  }}
                 />
                 {option}
               </label>
@@ -74,6 +105,24 @@ export default function ExerciseCard({ exercise }) {
           </>
         );
 
+      case "drag-sort":
+        return (
+          <div className="drag-sort-list">
+            {sortedItems.map((item, index) => (
+              <div
+                key={index}
+                draggable
+                onDragStart={() => handleDragStartIndex(index)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={() => handleDropIndex(index)}
+                className="drag-sort-item"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        );
+
       default:
         return <p className="error-text">שיטת מענה לא נתמכת</p>;
     }
@@ -94,15 +143,23 @@ export default function ExerciseCard({ exercise }) {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>{exercise.topic}</h3>
             <p>{exercise.question}</p>
-            <p><b>רמת קושי:</b> {exercise.difficulty}</p>
-            <p><b>כיתה:</b> {exercise.grade}</p>
+            <p>
+              <b>רמת קושי:</b> {exercise.difficulty}
+            </p>
+            <p>
+              <b>כיתה:</b> {exercise.grade}
+            </p>
 
             <div className="answer-section">{renderAnswerInput()}</div>
 
             <button
               className="check-button"
               onClick={checkAnswer}
-              disabled={!userAnswer}
+              disabled={
+                exercise.answerType === "drag-sort"
+                  ? sortedItems.length === 0
+                  : !userAnswer
+              }
             >
               בדוק תשובה
             </button>

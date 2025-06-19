@@ -98,7 +98,7 @@ const topicColors = {
 
   return (
     <div className="exercises-list-container">
-      <h2 className="exercises-title">תרגילים לכיתה שלך</h2>
+      <h2 className="exercises-title">תרגולים לכיתה שלך</h2>
 
       {topics.length === 0 ? (
         <p className="no-exercises">לא נמצאו תרגילים עבור הכיתה שלך</p>
