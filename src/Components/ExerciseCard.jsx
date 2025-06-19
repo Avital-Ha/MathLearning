@@ -24,12 +24,13 @@ export default function ExerciseCard({ exercise }) {
         return (
           <div className="multiple-choice">
             {exercise.options?.map((option, index) => (
-              <label key={index} className="option-label">
-                <input
+              <label key={index} className="option-label" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+               <input
                   type="radio"
                   name={`question-${exercise.id}`}
                   value={option}
                   onChange={(e) => setUserAnswer(e.target.value)}
+                  style={{ transform: 'scale(1.5)', marginRight: '8px' ,cursor:'pointer'}} // 1.5 = הגדלה של 150%
                 />
                 {option}
               </label>
