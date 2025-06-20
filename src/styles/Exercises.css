@@ -69,3 +69,30 @@
     border-radius: 30px;
     color: white;
 }
+.dropdown-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.topic-tab {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.topic-tab:hover {
+  background-color: #ccc;
+}
+
+.topic-tab.active {
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+}

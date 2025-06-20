@@ -1,120 +1,183 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../FireBase";
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import "../styles/Exercises.css";
-import ExerciseCard from "../Components/ExerciseCard"
+import ExerciseCard from "../Components/ExerciseCard";
+import AddExerciseForm from "../Components/AddExerciseForm"; // לא מוצג כרגע, אבל נשאר בקוד
 
 export default function Exercises() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [userType, setUserType] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
-const topicColors = {
-  חיבור: "#70b8bb",        // טורקיז בינוני
-  השוואה: "#5a8de0",       // כחול בינוני
-  חיסור: "#4ba287",        // ירוק בינוני
-  "סדר מספרים": "#4a90e2", // כחול עז
-  כפל: "#7e66b7",          // סגול בינוני
-  "בעיות מילוליות": "#7d8bc9", // סגול כחול
-  חילוק: "#4db9f7",        // תכלת עז
-  שעון: "#4bb7aa",         // טורקיז בהיר-כהה
-  שברים: "#a368b7",        // סגול כהה-בינוני
-  "שברים דומים": "#4ec9e6", // טורקיז תכלת
-  אחוזים: "#6fb37b",       // ירוק מעט כהה
-  חזקות: "#7d8bc9",        // סגול כחול
-  משוואות: "#a0d4fb",      // תכלת בהיר עם נגיעה של כחול
-  "העתקה למקומות": "#7e66b7", // סגול בינוני
-  "מערכות משוואות": "#4a90e2", // כחול עז
-  הנדסה: "#a368b7",        // סגול כהה-בינוני
-  פונקציות: "#5a8de0",     // כחול בינוני
-  טרינום: "#6fb37b",       // ירוק מעט כהה
-  טריגונומטריה: "#4bb7aa", // טורקיז בהיר-כהה
-  וקטורים: "#4a90e2",      // כחול עז
-};
+  const [activeGrade, setActiveGrade] = useState("");
+
+  // צבעים לפי נושאים
+  const topicColors = {
+    חיבור: "#70b8bb",
+    השוואה: "#5a8de0",
+    חיסור: "#4ba287",
+    "סדר מספרים": "#4a90e2",
+    כפל: "#7e66b7",
+    "בעיות מילוליות": "#7d8bc9",
+    חילוק: "#4db9f7",
+    שעון: "#4bb7aa",
+    שברים: "#a368b7",
+    "שברים דומים": "#4ec9e6",
+    אחוזים: "#6fb37b",
+    חזקות: "#7d8bc9",
+    משוואות: "#a0d4fb",
+    "העתקה למקומות": "#7e66b7",
+    "מערכות משוואות": "#4a90e2",
+    הנדסה: "#a368b7",
+    פונקציות: "#5a8de0",
+    טרינום: "#6fb37b",
+    טריגונומטריה: "#4bb7aa",
+    וקטורים: "#4a90e2",
+  };
 
   useEffect(() => {
-    async function fetchExercisesForUser() {
+    async function fetchData() {
       setLoading(true);
-      setError("");
       try {
         const user = auth.currentUser;
-        if (!user) {
-          setError("משתמש לא מחובר");
-          setExercises([]);
-          setLoading(false);
-          return;
-        }
-        const userDocRef = doc(db, "users", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
-        if (!userDocSnap.exists()) {
-          setError("משתמש לא נמצא במסד הנתונים");
-          setExercises([]);
-          setLoading(false);
-          return;
-        }
-        const userData = userDocSnap.data();
-        const userGrade = userData.grade;
-        if (!userGrade) {
-          setError("כיתה לא מוגדרת למשתמש");
-          setExercises([]);
-          setLoading(false);
-          return;
-        }
-        const exercisesRef = collection(db, "exercises");
-        const q = query(exercisesRef, where("grade", "==", userGrade));
-        const querySnapshot = await getDocs(q);
+        if (!user) throw new Error("משתמש לא מחובר");
 
-        const fetchedExercises = [];
-        querySnapshot.forEach((doc) => {
-          fetchedExercises.push({ id: doc.id, ...doc.data() });
-        });
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (!userDoc.exists()) throw new Error("משתמש לא נמצא במסד");
 
-        setExercises(fetchedExercises);
+        const userData = userDoc.data();
+        const userType = userData.user_type;
+        const grade = userData.grade;
 
-        if (fetchedExercises.length > 0) {
-          setActiveTopic(fetchedExercises[0].topic);
+        setUserType(userType);
+
+        let q;
+        if (userType === "teacher") {
+          q = query(collection(db, "exercises"));
+        } else {
+          if (!grade) throw new Error("כיתה לא מוגדרת למשתמש");
+          q = query(collection(db, "exercises"), where("grade", "==", grade));
+        }
+
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setExercises(data);
+
+        // קביעת טאב ברירת מחדל
+        if (data.length > 0) {
+          setActiveTopic(data[0].topic);
+          if (userType === "teacher") setActiveGrade(data[0].grade);
         }
 
       } catch (err) {
         console.error(err);
-        setError("שגיאה בטעינת התרגילים");
+        setError(err.message || "שגיאה בטעינת הנתונים");
       } finally {
         setLoading(false);
       }
     }
-    fetchExercisesForUser();
+
+    fetchData();
   }, []);
+
+  const groupBy = (arr, key) =>
+    arr.reduce((acc, item) => {
+      acc[item[key]] = acc[item[key]] || [];
+      acc[item[key]].push(item);
+      return acc;
+    }, {});
 
   if (loading) return <p className="loading">טוען תרגילים...</p>;
   if (error) return <p className="error">{error}</p>;
+  if (exercises.length === 0) return <p className="no-exercises">לא נמצאו תרגילים</p>;
 
-  const exercisesByTopic = exercises.reduce((acc, exercise) => {
-    if (!acc[exercise.topic]) acc[exercise.topic] = [];
-    acc[exercise.topic].push(exercise);
-    return acc;
-  }, {});
+  const groupedByGrade = groupBy(exercises, "grade");
+  const groupedByTopic = groupBy(exercises, "topic");
 
-  const topics = Object.keys(exercisesByTopic);
+  const topics = userType === "teacher"
+    ? Object.keys(groupBy(exercises.filter(ex => ex.grade === activeGrade), "topic"))
+    : Object.keys(groupedByTopic);
 
   return (
     <div className="exercises-list-container">
-      <h2 className="exercises-title">תרגולים לכיתה שלך</h2>
+      <h2 className="exercises-title">
+        {userType === "teacher" ? "תרגולים לפי כיתה" : "תרגולים לפי נושא"}
+      </h2>
 
-      {topics.length === 0 ? (
-        <p className="no-exercises">לא נמצאו תרגילים עבור הכיתה שלך</p>
-      ) : (
+      {/* מורה – תפריט כיתות וטאבים לפי נושא */}
+      {userType === "teacher" && (
         <>
-          <div className="tabs" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+          <select
+            className="dropdown-select"
+            value={activeGrade}
+            onChange={(e) => {
+              setActiveGrade(e.target.value);
+              const filtered = exercises.filter(ex => ex.grade === e.target.value);
+              const topics = [...new Set(filtered.map(ex => ex.topic))];
+              setActiveTopic(topics[0]);
+            }}
+          >
+            <option value="">בחר כיתה</option>
+            {Object.keys(groupedByGrade).map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+          </select>
+
+          {activeGrade && (
+            <>
+              <div className="tabs">
+                {topics.map((topic) => (
+                  <button
+                    key={topic}
+                    className={`topic-tab ${activeTopic === topic ? "active" : ""}`}
+                    onClick={() => setActiveTopic(topic)}
+                    style={{ backgroundColor: topicColors[topic] || "#ccc" }}
+                  >
+                    {topic}
+                  </button>
+                ))}
+              </div>
+
+              <div className="exercises-grid">
+                {exercises
+                  .filter(ex => ex.grade === activeGrade && ex.topic === activeTopic)
+                  .map(ex => (
+                    <ExerciseCard key={ex.id} exercise={ex} />
+                  ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
+
+      {/* תלמיד – תצוגת נושאים */}
+      {userType !== "teacher" && (
+        <>
+          <div className="tabs">
             {topics.map((topic) => (
               <button
                 key={topic}
                 onClick={() => setActiveTopic(topic)}
-                className="topic-tab"
+                className={`topic-tab ${activeTopic === topic ? "active" : ""}`}
                 style={{
-                 backgroundColor: topicColors[topic] || "transparent",
-                borderBottom: activeTopic === topic ? "3px solid blue" : "3px solid transparent",
-                fontWeight: activeTopic === topic ? "bold" : "normal",
-
+                  backgroundColor: topicColors[topic] || "transparent",
+                  borderBottom: activeTopic === topic ? "3px solid blue" : "3px solid transparent",
+                  fontWeight: activeTopic === topic ? "bold" : "normal",
                 }}
               >
                 {topic}
@@ -123,7 +186,7 @@ const topicColors = {
           </div>
 
           <div className="exercises-grid">
-            {exercisesByTopic[activeTopic].map((ex) => (
+            {groupedByTopic[activeTopic]?.map((ex) => (
               <ExerciseCard key={ex.id} exercise={ex} />
             ))}
           </div>
