@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/MathLearning/static/css/main.09d14787.css",
-    "main.js": "/MathLearning/static/js/main.31329a89.js",
-    "static/js/453.c70d09c5.chunk.js": "/MathLearning/static/js/453.c70d09c5.chunk.js",
+    "main.css": "/MathLearning/static/css/main.e83337e5.css",
+    "main.js": "/MathLearning/static/js/main.65ab9c81.js",
+    "static/js/453.bc5949fd.chunk.js": "/MathLearning/static/js/453.bc5949fd.chunk.js",
     "static/media/logo192.png": "/MathLearning/static/media/logo192.70fe2b96d638b4dac276.png",
     "index.html": "/MathLearning/index.html",
-    "main.09d14787.css.map": "/MathLearning/static/css/main.09d14787.css.map",
-    "main.31329a89.js.map": "/MathLearning/static/js/main.31329a89.js.map",
-    "453.c70d09c5.chunk.js.map": "/MathLearning/static/js/453.c70d09c5.chunk.js.map"
+    "main.e83337e5.css.map": "/MathLearning/static/css/main.e83337e5.css.map",
+    "main.65ab9c81.js.map": "/MathLearning/static/js/main.65ab9c81.js.map",
+    "453.bc5949fd.chunk.js.map": "/MathLearning/static/js/453.bc5949fd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09d14787.css",
-    "static/js/main.31329a89.js"
+    "static/css/main.e83337e5.css",
+    "static/js/main.65ab9c81.js"
   ]
 }
