@@ -7,10 +7,13 @@ import {
   getDocs,
   query,
   where,
+  addDoc,
 } from "firebase/firestore";
 import "../styles/Exercises.css";
 import ExerciseCard from "../Components/ExerciseCard";
-import AddExerciseForm from "../Components/AddExerciseForm"; // לא מוצג כרגע, אבל נשאר בקוד
+import AddExerciseForm from "../Components/AddExerciseForm";
+import topicColors from "../data/TopicColors";
+import { setDoc } from "firebase/firestore"; 
 
 export default function Exercises() {
   const [exercises, setExercises] = useState([]);
@@ -19,30 +22,7 @@ export default function Exercises() {
   const [userType, setUserType] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
   const [activeGrade, setActiveGrade] = useState("");
-
-  // צבעים לפי נושאים
-  const topicColors = {
-    חיבור: "#70b8bb",
-    השוואה: "#5a8de0",
-    חיסור: "#4ba287",
-    "סדר מספרים": "#4a90e2",
-    כפל: "#7e66b7",
-    "בעיות מילוליות": "#7d8bc9",
-    חילוק: "#4db9f7",
-    שעון: "#4bb7aa",
-    שברים: "#a368b7",
-    "שברים דומים": "#4ec9e6",
-    אחוזים: "#6fb37b",
-    חזקות: "#7d8bc9",
-    משוואות: "#a0d4fb",
-    "העתקה למקומות": "#7e66b7",
-    "מערכות משוואות": "#4a90e2",
-    הנדסה: "#a368b7",
-    פונקציות: "#5a8de0",
-    טרינום: "#6fb37b",
-    טריגונומטריה: "#4bb7aa",
-    וקטורים: "#4a90e2",
-  };
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -76,12 +56,10 @@ export default function Exercises() {
 
         setExercises(data);
 
-        // קביעת טאב ברירת מחדל
         if (data.length > 0) {
           setActiveTopic(data[0].topic);
           if (userType === "teacher") setActiveGrade(data[0].grade);
         }
-
       } catch (err) {
         console.error(err);
         setError(err.message || "שגיאה בטעינת הנתונים");
@@ -93,6 +71,42 @@ export default function Exercises() {
     fetchData();
   }, []);
 
+  // פונקציה להוספת תרגיל חדש ל-Firebase ולמצב המקומי
+  
+const handleAddExercise = async (newExercise) => {
+  try {
+    // שלב 1: לשלוף את כל המסמכים ולמצוא את המזהה הכי גבוה
+    const snapshot = await getDocs(collection(db, "exercises"));
+    let maxNumber = 0;
+
+    snapshot.forEach((doc) => {
+      const id = doc.id;
+      const match = id.match(/^EXERCISE(\d+)$/);
+      if (match) {
+        const number = parseInt(match[1]);
+        if (number > maxNumber) maxNumber = number;
+      }
+    });
+
+    // שלב 2 + 3: לבנות מזהה חדש
+    const newId = `EXERCISE${maxNumber + 1}`;
+
+    // שלב 4: לשמור את המסמך עם המזהה החדש
+    await setDoc(doc(db, "exercises", newId), newExercise);
+
+    const exerciseWithId = { id: newId, ...newExercise };
+    setExercises((prev) => [...prev, exerciseWithId]);
+    setShowAddForm(false);
+
+    if (!activeTopic) setActiveTopic(newExercise.topic);
+    if (!activeGrade) setActiveGrade(newExercise.grade);
+  } catch (error) {
+    console.error("Error adding exercise: ", error);
+    setError("שגיאה בהוספת תרגיל");
+  }
+};
+
+
   const groupBy = (arr, key) =>
     arr.reduce((acc, item) => {
       acc[item[key]] = acc[item[key]] || [];
@@ -102,22 +116,22 @@ export default function Exercises() {
 
   if (loading) return <p className="loading">טוען תרגילים...</p>;
   if (error) return <p className="error">{error}</p>;
-  if (exercises.length === 0) return <p className="no-exercises">לא נמצאו תרגילים</p>;
+  if (exercises.length === 0 && !showAddForm) return <p className="no-exercises">לא נמצאו תרגילים</p>;
 
   const groupedByGrade = groupBy(exercises, "grade");
   const groupedByTopic = groupBy(exercises, "topic");
 
-  const topics = userType === "teacher"
-    ? Object.keys(groupBy(exercises.filter(ex => ex.grade === activeGrade), "topic"))
-    : Object.keys(groupedByTopic);
+  const topics =
+    userType === "teacher"
+      ? Object.keys(groupBy(exercises.filter((ex) => ex.grade === activeGrade), "topic"))
+      : Object.keys(groupedByTopic);
 
   return (
-    <div className="exercises-list-container">
+    <div className="exercises-list-container" data-aos="fade-up">
       <h2 className="exercises-title">
         {userType === "teacher" ? "תרגולים לפי כיתה" : "תרגולים לפי נושא"}
       </h2>
 
-      {/* מורה – תפריט כיתות וטאבים לפי נושא */}
       {userType === "teacher" && (
         <>
           <select
@@ -125,20 +139,33 @@ export default function Exercises() {
             value={activeGrade}
             onChange={(e) => {
               setActiveGrade(e.target.value);
-              const filtered = exercises.filter(ex => ex.grade === e.target.value);
-              const topics = [...new Set(filtered.map(ex => ex.topic))];
-              setActiveTopic(topics[0]);
+              const filtered = exercises.filter((ex) => ex.grade === e.target.value);
+              const newTopics = [...new Set(filtered.map((ex) => ex.topic))];
+              setActiveTopic(newTopics[0] || "");
             }}
           >
             <option value="">בחר כיתה</option>
-            {Object.keys(groupedByGrade).map((grade) => (
-              <option key={grade} value={grade}>
-                {grade}
-              </option>
-            ))}
+            {Object.keys(groupedByGrade)
+              .sort()
+              .map((grade) => (
+                <option key={grade} value={grade}>
+                  {grade}
+                </option>
+              ))}
           </select>
 
-          {activeGrade && (
+          <button className="add-exercise-btn" onClick={() => setShowAddForm(true)}>
+            הוספת תרגיל +
+          </button>
+
+          {showAddForm ? (
+            <AddExerciseForm
+              onClose={() => setShowAddForm(false)}
+              defaultGrade={activeGrade}
+              defaultTopic={activeTopic}
+              onAddExercise={handleAddExercise}
+            />
+          ) : (
             <>
               <div className="tabs">
                 {topics.map((topic) => (
@@ -155,8 +182,8 @@ export default function Exercises() {
 
               <div className="exercises-grid">
                 {exercises
-                  .filter(ex => ex.grade === activeGrade && ex.topic === activeTopic)
-                  .map(ex => (
+                  .filter((ex) => ex.grade === activeGrade && ex.topic === activeTopic)
+                  .map((ex) => (
                     <ExerciseCard key={ex.id} exercise={ex} />
                   ))}
               </div>
@@ -165,8 +192,7 @@ export default function Exercises() {
         </>
       )}
 
-      {/* תלמיד – תצוגת נושאים */}
-      {userType !== "teacher" && (
+      {userType !== "teacher" && !showAddForm && (
         <>
           <div className="tabs">
             {topics.map((topic) => (
@@ -176,8 +202,6 @@ export default function Exercises() {
                 className={`topic-tab ${activeTopic === topic ? "active" : ""}`}
                 style={{
                   backgroundColor: topicColors[topic] || "transparent",
-                  borderBottom: activeTopic === topic ? "3px solid blue" : "3px solid transparent",
-                  fontWeight: activeTopic === topic ? "bold" : "normal",
                 }}
               >
                 {topic}

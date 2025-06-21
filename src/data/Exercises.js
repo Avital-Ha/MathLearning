@@ -217,10 +217,10 @@ const exercises = [
     topic: "מספרים",
     grade: "א",
     difficulty: "קל",
-    question: "בחר את המספר 7",
+    question: "בחר את המספר שגדול מ5 וקטן מ8",
     answer: "7",
     answerType: "multiple",
-    options: ["5", "7", "9", "6"]
+    options: ["5", "7", "9", "8"]
   },
   {
     topic: "סדר מספרים",
@@ -639,3 +639,5 @@ const exercises = [
 
 
 ];
+
+export default exercises;

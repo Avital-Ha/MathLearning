@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/ExerciseCard.css";
+import saveUserProgress from "../utils/saveUserProgress";
 
 export default function ExerciseCard({ exercise }) {
   const [expanded, setExpanded] = useState(false);
@@ -28,18 +29,28 @@ export default function ExerciseCard({ exercise }) {
     setSortedItems(updated);
     setDraggedIndex(null);
   };
+const checkAnswer = () => {
+  let isCorrect = false;
 
-  const checkAnswer = () => {
-    let isCorrect = false;
+  if (exercise.answerType === "drag-sort") {
+    isCorrect = JSON.stringify(sortedItems) === JSON.stringify(exercise.answer);
+  } else {
+    isCorrect = userAnswer === exercise.answer;
+  }
 
-    if (exercise.answerType === "drag-sort") {
-      isCorrect = JSON.stringify(sortedItems) === JSON.stringify(exercise.answer);
-    } else {
-      isCorrect = userAnswer === exercise.answer;
-    }
+  setFeedback(isCorrect ? "correct" : "wrong");
 
-    setFeedback(isCorrect ? "correct" : "wrong");
-  };
+  if (isCorrect) {
+    // שמירת ההתקדמות בפיירסטור
+    saveUserProgress(exercise.id, {
+      completed: true,
+      answer: exercise.answerType === "drag-sort" ? sortedItems : userAnswer,
+      exerciseId: exercise.id,
+      topic: exercise.topic,
+      checkedAt: new Date().toISOString()
+    });
+  }
+};
 
   const renderAnswerInput = () => {
     switch (exercise.answerType) {

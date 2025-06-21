@@ -4,7 +4,7 @@ import '../styles/Home.css';
 
 export default function Home() {
   return (
-    <div className="home-container">
+    <div  data-aos="fade-up" className="home-container">
       <header className="home-header">
         <h1>ברוכים הבאים ל <br/>MathLearning</h1>
         <p>אתר למידה מתמטי מותאם אישית עם משחקים תרגולים והתקדמות שלכם</p>

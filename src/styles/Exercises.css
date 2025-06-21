@@ -37,10 +37,11 @@
 }
 
 .exercises-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+margin-top: 5vh;
+justify-content: center;
 }
 
 
@@ -92,7 +93,33 @@
 }
 
 .topic-tab.active {
-  background-color: #4a90e2;
   color: white;
   font-weight: bold;
+  border-bottom: 5px solid black;
+}
+.add-exercise-btn {
+     background-color: #ffffff;
+    color: #6756a0;
+    direction: rtl;
+    font-family: "Heebo";
+    margin-right: 38vw;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(74, 144, 226, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-exercise-btn:hover {
+  background-color: #6756a0;     /* כחול כהה יותר בהובר */
+  transform: scale(1.05);        /* מעט הגדלה בהובר */
+}
+
+.add-exercise-btn:active {
+  background-color: #543da0;     /* כחול כהה בעת לחיצה */
+  transform: scale(0.98);        /* הקטנה קלה בלחיצה */
+  box-shadow: 0 1px 3px rgba(47, 94, 168, 0.5);
 }

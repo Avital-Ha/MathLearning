@@ -1,0 +1,69 @@
+.progress-page {
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  direction: rtl;
+}
+
+.young-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.young-topic-card {
+  background: linear-gradient(135deg, #a0d8f7 0%, #77b9f7 100%);
+  border-radius: 20px;
+  padding: 15px;
+  width: 180px;
+  box-shadow: 0 5px 15px rgba(119, 185, 247, 0.6);
+  text-align: center;
+  color: #003366;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.young-topic-card:hover {
+  transform: scale(1.05);
+}
+
+.bubbles-container {
+  margin: 10px 0;
+}
+
+.bubble {
+  font-size: 26px;
+  margin: 0 3px;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+.bubble-filled {
+  color: #2980b9;
+  filter: drop-shadow(0 0 3px #3498db);
+}
+.bubble-empty {
+  color: #a9cce3;
+}
+
+.flower-decoration {
+  font-size: 28px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  opacity: 0.3;
+  pointer-events: none;
+  user-select: none;
+}
+
+.progress-page h2 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* עיצוב הגרף למבוגרים */
+.recharts-wrapper {
+  font-family: Arial, sans-serif;
+  background: #f9f9ff;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(100, 100, 150, 0.1);
+}
