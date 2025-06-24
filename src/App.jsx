@@ -9,20 +9,13 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Exercises from "./Pages/Exercises";
 import UserProgress from "./Pages/UserProgress";
+import Games from "./Pages/Games";
+import GamePage from "./Pages/GamePage";
 
 function Dashboard() {
   return <h1>Dashboard Page</h1>;
 }
 
-function Games() {
-  return <h1>Games Page</h1>;
-}
-function Progress() {
-  return <h1>Progress Page</h1>;
-}
-function Setup() {
-  return <h1>Setup Page (No layout)</h1>;
-}
 
 export default function App() {
     useEffect(() => {
@@ -35,6 +28,7 @@ export default function App() {
         <Route path="/auth" element={<AuthChoice />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/gamePage/:gameId" element={<GamePage />} />
 
         {/* דפים בתוך Layout */}
         <Route path="/" element={<Layout />}>
@@ -42,6 +36,7 @@ export default function App() {
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Exercises" element={<Exercises />} />
           <Route path="Games" element={<Games />} />
+
           <Route path="Progress" element={<UserProgress/>} />
           {/* כל נתיב לא מוכר מפנה ל-Home */}
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -141,7 +141,6 @@ useEffect(() => {
               </div>
               <p>{correct} מתוך {total} תרגילים נכונים</p>
               <p>{percent}% הצלחה</p>
-              <div className="flower-decoration" aria-hidden="true">🌸🌼🌸</div>
             </div>
           ))}
         </div>
