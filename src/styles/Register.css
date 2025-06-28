@@ -1,4 +1,22 @@
-.register-container {
+
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-form {
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .register-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+  .register-container {
   right: -20vw;
     width: 60vw;
     position: relative;
@@ -90,14 +108,97 @@
   box-shadow: 0 6px 14px rgba(26, 84, 209, 0.6);
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .register-form {
+}
+@media (min-width: 1280px) {
+    .register-container {
+  right: -20vw;
+    width: 60vw;
+    position: relative;
+    min-height: 99vh;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    border-radius: 8px;
-  }
+    font-family: 'Heebo';
+}
 
-  .register-title {
-    font-size: 1.8rem;
-  }
+.register-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
+}
+
+.register-text {
+  font-size: clamp(1rem, 1.6vw, 1.8rem);
+  text-align: center;
+}
+.register-form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-label {
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: clamp(1rem, 1.2vw, 1.3rem);
+}
+
+.register-input,
+.register-select {
+  width: 100%;
+  padding: 14px 18px;
+  margin: 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+}
+
+.register-input:focus,
+.register-select:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
+  outline: none;
+}
+
+.register-error {
+  color: #e74c3c;
+  margin: 12px 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.register-button {
+  width: 22vw;
+  background-color: #36d8c7;
+  color: #000000;
+  padding: 15px 0;
+  margin-top: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+}
+
+.register-button:hover {
+  background-color: #066359;
+  box-shadow: 0 6px 14px rgba(26, 84, 209, 0.6);
+}
 }
