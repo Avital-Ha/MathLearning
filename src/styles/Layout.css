@@ -128,21 +128,19 @@ font-size: 1.2vw ;
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
-
 .mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 280px;
-  height: 100vh;
-  background: white;
-  box-shadow: 2px 0 8px rgb(0 0 0 / 0.15);
-  z-index: 101;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 8px rgb(0 0 0 / 0.15);
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }
-
 .mobile-menu-header {
   display: flex;
   justify-content: space-between;
@@ -255,9 +253,23 @@ font-size: 1.2vw ;
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
-  .mobile-menu-button {
-    display: inline-block;
-  }
+      .mobile-menu-button {
+        font-size: 1.6rem;
+        display: inline-block;
+    }
+    .header-greeting {
+    font-size: 0.7rem;
+    color: #555;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.button-ghost {
+    font-size: 0.8rem;
+    background: transparent;
+    font-family: "Heebo";
+    color: #3498db;
+}
+
 
   .desktop-nav {
     display: none;
