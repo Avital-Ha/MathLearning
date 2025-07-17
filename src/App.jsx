@@ -11,6 +11,7 @@ import Exercises from "./Pages/Exercises";
 import UserProgress from "./Pages/UserProgress";
 import Games from "./Pages/Games";
 import GamePage from "./Pages/GamePage";
+import Farm from "./Pages/Farm";
 
 function Dashboard() {
   return <h1>Dashboard Page</h1>;
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gamePage/:gameId" element={<GamePage />} />
+         {/* <Route path="Farm" element={<Farm />} /> */}
 
         {/* דפים בתוך Layout */}
         <Route path="/" element={<Layout />}>
@@ -36,6 +38,7 @@ export default function App() {
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Exercises" element={<Exercises />} />
           <Route path="Games" element={<Games />} />
+         
 
           <Route path="Progress" element={<UserProgress/>} />
           {/* כל נתיב לא מוכר מפנה ל-Home */}

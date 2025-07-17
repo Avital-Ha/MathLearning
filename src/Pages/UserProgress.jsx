@@ -12,7 +12,6 @@ export default function UserProgress() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // שליפת פרטי המשתמש המחובר
   useEffect(() => {
     async function fetchUserData() {
       const auth = getAuth();
@@ -44,7 +43,6 @@ export default function UserProgress() {
     fetchUserData();
   }, []);
 
-  // טען את התרגילים מ-Firestore
 useEffect(() => {
   async function fetchExercises() {
     try {
@@ -65,7 +63,6 @@ useEffect(() => {
 }, [userGrade]);
 
 
-  // טען את הפרוגרס של המשתמש מ-Firestore
   useEffect(() => {
     async function fetchProgress() {
       if (!userId) return;
@@ -88,7 +85,6 @@ useEffect(() => {
 
   if (loading || !userGrade || exercises.length === 0) return <p>טוען נתונים...</p>;
 
-  // מיפוי תרגילים לפי נושא
   const exercisesByTopic = exercises.reduce((acc, exercise) => {
     const topic = exercise.topic?.trim() || "כללי";
     if (!acc[topic]) acc[topic] = [];
@@ -96,7 +92,6 @@ useEffect(() => {
     return acc;
   }, {});
 
-  // ספירת תרגילים שהושלמו לפי נושא
   const countsByTopic = Object.keys(exercisesByTopic).reduce((acc, topic) => {
     acc[topic] = { total: exercisesByTopic[topic].length, correct: 0 };
     return acc;

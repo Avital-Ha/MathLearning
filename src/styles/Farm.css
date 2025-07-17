@@ -1,0 +1,45 @@
+
+@media (max-width: 480px) {
+  .Farm-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+}
+@media (min-width: 481px) and (max-width: 768px) {
+}
+@media (min-width: 769px) and (max-width: 1279px) {
+  .Farm-container {
+    height: 100VH;
+  width: 100VW;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 1000;
+  overflow: hidden;
+  }
+  .img-Farm{
+      width: 100VW;
+      position: fixed;
+      height: auto;
+      margin-bottom: 0vh;
+      right: 50%;
+      transform: translateX(50%);
+
+  }
+}
+@media (min-width: 1280px) {
+.Farm-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+}
