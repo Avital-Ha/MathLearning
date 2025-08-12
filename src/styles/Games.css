@@ -29,12 +29,12 @@
   background: #5a47cc;
 }
 /* עיצוב מלא רוחב וגובה למסך */
-.fullscreen {
+.fullscreen-game {
   width: 100vw;      /* רוחב מלא של חלון הצפייה */
   height: 100vh;     /* גובה מלא של חלון הצפייה */
   overflow: hidden;  /* כדי למנוע גלילה */
   display: flex;     /* אם רוצים למרכז תוכן */
   justify-content: center; /* מרכז אופקי */
   align-items: center;     /* מרכז אנכי */
-  background-color: #000; /* צבע רקע לדוגמה */
+  background: linear-gradient(135deg, #d0e8ff 0%, #c0f0ea 50%, #a2b0ff 100%);
 }

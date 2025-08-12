@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../Games/Styles/CandyCrush.css"
 
 const width = 8;
 const candyEmojis = ["🍭", "🍬", "🍫", "🍡", "🍪", "🍩"];
@@ -141,23 +142,15 @@ export default function CandyCrush() {
   }, [board]);
 
   return (
-    <div style={{ textAlign: "center", padding: 20 }}>
+    <div className="game-zone-candy">
       <h1>Candy Crush מתמטי עם אימוג׳ים</h1>
       <p>ניקוד: {score} | חיים: {lives}</p>
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${width}, 50px)`,
-          justifyContent: "center",
-          gap: 5,
-          userSelect: "none",
-          fontSize: 32,
-          lineHeight: "50px",
-          cursor: "grab",
-        }}
+        className="board-game-candy"
       >
         {board.map((candy, idx) => (
           <div
+            className="board-element-candy"
             key={idx}
             data-id={idx}
             draggable={true}
@@ -165,16 +158,6 @@ export default function CandyCrush() {
             onDragOver={(e) => e.preventDefault()}
             onDrop={dragDrop}
             onDragEnd={dragEnd}
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 10,
-              border: "1px solid #333",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              userSelect: "none",
-            }}
           >
             {candy}
           </div>

@@ -1,0 +1,64 @@
+.game-zone-candy {
+text-align: center;
+    width: 46vw;
+    height: 46vw;
+    padding: 20px;
+    background-color: white;
+    font-family: 'Heebo', sans-serif;
+    border-radius: 46px;
+}
+
+.game-zone-candy h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.game-zone-candy p {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.board-game-candy {
+  display: grid;
+  grid-template-columns: repeat(8, 5vw); /* ברירת מחדל ל-8 עמודות */
+  justify-content: center;
+  gap: 5px;
+  user-select: none;
+  font-size: 5vmin;
+  cursor: grab;
+  line-height: 50px;
+}
+
+.board-element-candy {
+  width: 4.5vw;
+  height: 4.5vw;
+  border-radius: 10px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fefefe;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  animation: popIn 0.2s ease;
+}
+
+/* אפקט hover */
+.board-element-candy:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* אפקט לגרירה */
+.board-element-candy:active {
+  transform: scale(0.95);
+  cursor: grabbing;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}

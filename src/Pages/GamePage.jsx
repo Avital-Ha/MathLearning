@@ -24,7 +24,7 @@ export default function GamePage() {
   }
 
   return (
-    <div className="fullscreen">
+    <div className="fullscreen-game">
       {content}
     </div>
   );

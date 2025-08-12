@@ -136,42 +136,60 @@
   text-align: center;
 }
 .register-form {
-  background: #fff;
+   background: #fff;
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 420px;
+  max-width: 675px;
   display: flex;
   flex-direction: column;
 }
-
 .register-label {
-  font-weight: 600;
-  margin-top: 15px;
-  margin-bottom: 6px;
-  color: #333;
-  font-size: clamp(1rem, 1.2vw, 1.3rem);
+        width: 111%;
+        position: relative;
+        right: 16%;
+        display: block;
+        padding-left: 13vw;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #222;
+        font-size: clamp(1rem, 1.2vw, 3vmin);
+        letter-spacing: 0.5px;
 }
 
 .register-input,
 .register-select {
-  width: 100%;
+  width: 90%;
   padding: 14px 18px;
-  margin: 0;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
-  outline-offset: 2px;
+  background: #f9f9f9;
+  transition: all 0.25s ease;
+  margin-bottom: 16px; /* רווח אחרי השדה */
 }
 
+
+/* Hover עם קצת "הרמה" */
+.register-input:hover,
+.register-select:hover {
+  background: #fff;
+  border-color: #36d8c7;
+  box-shadow: 0 4px 10px rgba(54, 216, 199, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Focus עם אנימציה יותר מודגשת */
 .register-input:focus,
 .register-select:focus {
+  background: #fff;
   border-color: #2575fc;
-  box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
+  box-shadow: 0 5px 12px rgba(37, 117, 252, 0.35);
   outline: none;
+  transform: translateY(-1px) scale(1.01);
 }
+
 
 .register-error {
   color: #e74c3c;
@@ -182,23 +200,57 @@
 }
 
 .register-button {
-  width: 22vw;
-  background-color: #36d8c7;
-  color: #000000;
-  padding: 15px 0;
-  margin-top: 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: clamp(1rem, 1.2vw, 1.4rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+    position: relative;
+    right: 13%;
+    width: 69%;
+    background: linear-gradient(135deg, #36d8c7, #2575fc);
+    background-size: 200% 200%; /* מאפשר תנועה */
+    color: #fff;
+    padding: 15px 0;
+    margin-top: 24px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: clamp(1rem, 2.5vmin, 4vmin);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+}
+.register-button-1 {
+    position: relative;
+    width: 40%;
+    background: linear-gradient(135deg, #36d8c7, #2575fc);
+    background-size: 200% 200%; /* מאפשר תנועה */
+    color: #fff;
+    padding: 15px 0;
+    margin-top: 24px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: clamp(1rem, 2.5vmin, 4vmin);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
 }
 
 .register-button:hover {
-  background-color: #066359;
-  box-shadow: 0 6px 14px rgba(26, 84, 209, 0.6);
+    transform: translateY(-2px);
+    animation: gradientShift 1.5s ease infinite alternate;
 }
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.register-button:active {
+  transform: translateY(0);
+}
+
 }
