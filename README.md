@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# 📚 MATH LEARNING
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MATH LEARNING is an interactive educational platform designed to make mathematics more engaging, intuitive, and accessible for students.
 
-## Available Scripts
+The project combines visual learning, problem-solving, and interactive exercises to help users better understand mathematical concepts instead of relying solely on memorization.
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+* Interactive mathematics learning experience
+* Clear explanations of mathematical concepts
+* Practice exercises with instant feedback
+* Modern and responsive user interface
+* Visual approach to learning and problem solving
+* Suitable for students who want to strengthen their mathematical skills
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠 Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* React
+* JavaScript
+* HTML5
+* CSS3
+* Create React App
 
-### `npm test`
+## 🚀 Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Make sure you have the following installed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Node.js
+* npm
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the repository:
 
-### `npm run eject`
+```bash
+git clone <repository-url>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Navigate to the project directory:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd math-learning
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Install dependencies:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+### Running the Application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the development server:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Open your browser and navigate to:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```text
+http://localhost:3000
+```
 
-### Analyzing the Bundle Size
+## 📦 Build for Production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To create an optimized production build:
 
-### Making a Progressive Web App
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The production-ready files will be generated in the `build` folder.
 
-### Advanced Configuration
+## 🎯 Project Goal
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The goal of MATH LEARNING is to transform mathematics from a challenging subject into an engaging learning experience through interactive tools and modern web technologies.
 
-### Deployment
+## 👩‍💻 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed as an educational technology project focused on improving mathematics learning through interactive experiences.
